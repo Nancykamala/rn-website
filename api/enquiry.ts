@@ -5,7 +5,14 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+console.log("[api/enquiry] Environment check:", {
+  hasUrl: !!supabaseUrl,
+  hasKey: !!supabaseServiceKey,
+  urlPrefix: supabaseUrl?.substring(0, 20),
+});
+
 if (!supabaseUrl || !supabaseServiceKey) {
+  console.error("[api/enquiry] Missing Supabase environment variables");
   throw new Error("Missing Supabase environment variables");
 }
 
@@ -38,6 +45,8 @@ function checkRateLimit(ip: string): boolean {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  console.log("[api/enquiry] Request received:", { method: req.method });
+
   if (req.method !== "POST") {
     return res.status(405).json({ ok: false, error: "Method not allowed" });
   }
@@ -52,12 +61,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const body = req.body;
+    console.log("[api/enquiry] Request body keys:", Object.keys(body));
     const validated = contactSchema.parse(body);
+    console.log("[api/enquiry] Validation passed");
 
     if (validated._hp && validated._hp.length > 0) {
+      console.log("[api/enquiry] Honeypot triggered");
       return res.status(200).json({ ok: true });
     }
 
+    console.log("[api/enquiry] Inserting into Supabase...");
     const { error } = await supabase.from("enquiries").insert({
       name: validated.fullName,
       phone: validated.phone || null,
@@ -72,6 +85,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({ ok: false, error: "Something went wrong" });
     }
 
+    console.log("[api/enquiry] Insert successful");
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error("[api/enquiry] Validation error:", error);
