@@ -71,14 +71,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     console.log("[api/enquiry] Inserting into Supabase...");
-    const { error } = await supabase.from("enquiries").insert({
+    const { error, data } = await supabase.from("enquiries").insert({
       name: validated.fullName,
       phone: validated.phone || null,
       email: validated.workEmail,
       business: validated.company,
       services: validated.services || [],
       message: validated.message || null,
-    });
+    }).select();
+
+    console.log("[api/enquiry] Insert result:", { error, dataCount: data?.length });
 
     if (error) {
       console.error("[api/enquiry] Supabase error:", error);
