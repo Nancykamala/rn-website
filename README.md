@@ -26,9 +26,14 @@ Copy `.env.example` to `.env.local` and add your Supabase credentials:
 ```env
 SUPABASE_URL=your_supabase_project_url
 SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+RESEND_API_KEY=your_resend_api_key
+NOTIFY_EMAIL=your_notification_email@example.com
 ```
 
 **Important:** Never commit `.env.local` to git. The service role key should only be used server-side (in the API route).
+
+- `RESEND_API_KEY`: Your Resend API key for sending email notifications when new enquiries are submitted
+- `NOTIFY_EMAIL`: The email address to receive enquiry notifications
 
 ### Database Setup
 

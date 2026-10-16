@@ -385,6 +385,7 @@ const Hero = () => {
                     fontWeight: 700,
                     fontSize: 15.5,
                     letterSpacing: "-.005em",
+                    textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                     alignSelf: { xs: "stretch", sm: "flex-start" },
                     boxShadow: (theme) =>
                       `0 14px 40px -14px ${
@@ -403,7 +404,7 @@ const Hero = () => {
                             ? "rgba(124,92,255,.92)"
                             : "rgba(91,61,245,.75)"
                         }`,
-                      transform: "translateY(-1px)",
+                      transform: "translateY(-2px)",
                     },
                     "&:active": { transform: "translateY(0)" },
                     transition:

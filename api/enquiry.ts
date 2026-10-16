@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { Resend } from "resend";
 
 const SERVICES_OPTIONS = [
   "Dashboards",
@@ -54,6 +55,8 @@ const contactSchema = z.object({
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const resendApiKey = process.env.RESEND_API_KEY;
+const notifyEmail = process.env.NOTIFY_EMAIL;
 
 console.log("[api/enquiry] Environment check:", {
   hasUrl: !!supabaseUrl,
@@ -138,6 +141,44 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     console.log("[api/enquiry] Insert successful");
+
+    // Send notification email via Resend
+    if (resendApiKey && notifyEmail) {
+      try {
+        const resend = new Resend(resendApiKey);
+        const submittedAt = new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+          dateStyle: "medium",
+          timeStyle: "medium",
+        });
+
+        const emailBody = [
+          `Name: ${validated.fullName}`,
+          `Phone: ${validated.phone || "Not provided"}`,
+          `Email: ${validated.workEmail}`,
+          `Business: ${validated.company}`,
+          `Services: ${validated.services?.join(", ") || "None selected"}`,
+          `Message: ${validated.message || "No message"}`,
+          `Submitted: ${submittedAt}`,
+        ].join("\n\n");
+
+        await resend.emails.send({
+          from: "RN Website <onboarding@resend.dev>",
+          to: notifyEmail,
+          subject: `New enquiry from ${validated.fullName}`,
+          text: emailBody,
+          replyTo: validated.workEmail,
+        });
+
+        console.log("[api/enquiry] Email notification sent");
+      } catch (emailError) {
+        console.error("[api/enquiry] Failed to send email notification:", emailError);
+        // Don't fail the request if email fails
+      }
+    } else {
+      console.log("[api/enquiry] Skipping email notification - missing RESEND_API_KEY or NOTIFY_EMAIL");
+    }
+
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error("[api/enquiry] Validation error:", error);
