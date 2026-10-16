@@ -1,32 +1,130 @@
-# React + TypeScript + Vite
+# RN Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern React business website for RN - Business Intelligence, Dashboards & Microsoft 365 automation services.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 18 + TypeScript + Vite
+- Material UI v5 (MUI)
+- React Hook Form + Zod validation
+- Plus Jakarta Sans font
+- Supabase for data storage
+- Vercel for deployment
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Environment Variables
+
+Copy `.env.example` to `.env.local` and add your Supabase credentials:
+
+```env
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+**Important:** Never commit `.env.local` to git. The service role key should only be used server-side (in the API route).
+
+### Database Setup
+
+Create a Supabase table named `enquiries` with the following schema:
+
+```sql
+CREATE TABLE public.enquiries (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  name TEXT NOT NULL,
+  phone TEXT,
+  email TEXT NOT NULL,
+  business TEXT NOT NULL,
+  services TEXT[] DEFAULT ARRAY[]::TEXT[],
+  message TEXT,
+  status TEXT DEFAULT 'new'
+);
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+The site will be available at `http://localhost:5173`
+
+### Build
+
+```bash
+npm run build
+```
+
+### Type Check
+
+```bash
+tsc -b
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+## Deployment
+
+### Vercel Deployment
+
+1. Push your code to GitHub
+2. Import the project in Vercel
+3. Add environment variables in Vercel dashboard:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+4. Deploy
+
+The API route at `/api/enquiry.ts` will automatically be deployed as a Vercel serverless function.
+
+## Project Structure
+
+```
+src/
+├── content/
+│   └── siteContent.ts        # All website copy
+├── theme/
+│   ├── theme.ts              # MUI dark/light themes
+│   └── ColorModeContext.tsx  # Theme switching logic
+├── components/
+│   ├── Navbar.tsx
+│   ├── Hero.tsx
+│   ├── WhoWeHelp.tsx
+│   ├── Services.tsx
+│   ├── About.tsx
+│   ├── Process.tsx
+│   ├── WhyUs.tsx
+│   ├── Contact.tsx
+│   └── Footer.tsx
+├── hooks/
+│   └── useReveal.ts          # Scroll reveal animation
+├── App.tsx
+└── main.tsx
+
+api/
+├── _lib/
+│   └── schema.ts             # Shared Zod validation schema
+└── enquiry.ts                # Vercel serverless function
+```
+
+## Features
+
+- 🌓 Dark/light mode with system preference detection
+- 📱 Fully responsive design (mobile-first)
+- ✨ Smooth scroll reveal animations
+- 🎨 Modern gradient UI with glassmorphism effects
+- ✅ Form validation with React Hook Form + Zod
+- 🔒 Honeypot spam protection
+- 📊 Contact form with Supabase integration
+- ♿ WCAG AA accessibility compliance
+- 🚀 Optimized for performance
