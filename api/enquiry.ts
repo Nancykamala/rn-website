@@ -61,7 +61,10 @@ const notifyEmail = process.env.NOTIFY_EMAIL;
 console.log("[api/enquiry] Environment check:", {
   hasUrl: !!supabaseUrl,
   hasKey: !!supabaseServiceKey,
+  hasResendKey: !!resendApiKey,
+  hasNotifyEmail: !!notifyEmail,
   urlPrefix: supabaseUrl?.substring(0, 20),
+  notifyEmailPrefix: notifyEmail?.substring(0, 10),
 });
 
 if (!supabaseUrl || !supabaseServiceKey) {
@@ -143,8 +146,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.log("[api/enquiry] Insert successful");
 
     // Send notification email via Resend
+    console.log("[api/enquiry] Email check:", { hasResendKey: !!resendApiKey, hasNotifyEmail: !!notifyEmail });
     if (resendApiKey && notifyEmail) {
       try {
+        console.log("[api/enquiry] Attempting to send email...");
         const resend = new Resend(resendApiKey);
         const submittedAt = new Date().toLocaleString("en-IN", {
           timeZone: "Asia/Kolkata",
@@ -162,15 +167,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           `Submitted: ${submittedAt}`,
         ].join("\n\n");
 
-        await resend.emails.send({
+        const emailData = {
           from: "RN Website <onboarding@resend.dev>",
           to: notifyEmail,
           subject: `New enquiry from ${validated.fullName}`,
           text: emailBody,
           replyTo: validated.workEmail,
-        });
+        };
 
-        console.log("[api/enquiry] Email notification sent");
+        console.log("[api/enquiry] Email payload:", { to: notifyEmail, subject: emailData.subject });
+        const result = await resend.emails.send(emailData);
+        console.log("[api/enquiry] Email sent successfully:", result);
       } catch (emailError) {
         console.error("[api/enquiry] Failed to send email notification:", emailError);
         // Don't fail the request if email fails
