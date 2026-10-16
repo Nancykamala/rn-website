@@ -222,6 +222,7 @@ const Navbar = () => {
                   py: 1.1,
                   fontWeight: 700,
                   fontSize: 14.5,
+                  textShadow: "0 1px 2px rgba(0,0,0,0.3)",
                   boxShadow: (theme) =>
                     `0 10px 30px -12px ${
                       theme.palette.mode === "dark"
@@ -239,7 +240,9 @@ const Navbar = () => {
                           ? "rgba(124,92,255,.85)"
                           : "rgba(91,61,245,.7)"
                       }`,
+                    transform: "translateY(-2px)",
                   },
+                  transition: "transform .2s ease, box-shadow .2s ease, background .2s ease",
                 }}
               >
                 {navbar.ctaButton}
