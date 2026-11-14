@@ -1,5 +1,5 @@
-export const businessName = "RN";
-export const businessNameFull = "RN";
+export const businessName = "Datavise";
+export const businessNameFull = "Datavise";
 export const taglineShort = "Business Intelligence · Microsoft 365 · Automation";
 
 export const navbar = {
@@ -18,7 +18,7 @@ export const hero = {
   h1Line1: "Turn your data into decisions",
   h1Line2Gradient: "and your manual work into automation.",
   lead:
-    "RN designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
+    "Datavise designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
   primaryButton: "Book a free discovery call",
   primaryHref: "#contact",
   secondaryButton: "Explore services",
@@ -181,7 +181,7 @@ export const process = {
 
 export const whyUs = {
   id: "why",
-  tag: "Why RN",
+  tag: "Why Datavise",
   h2: "Practical analytics from people who know operations",
   sub: "",
   cards: [
@@ -238,20 +238,20 @@ export const contact = {
     {
       icon: "📞",
       label: "Phone",
-      value: "93600 16108",
-      href: "tel:+919360016108",
+      value: "+1 236 512 1809",
+      href: "tel:+12365121809",
     },
     {
       icon: "💬",
       label: "WhatsApp",
       value: "Chat with us",
-      href: "https://wa.me/919360016108",
+      href: "https://wa.me/12365121809",
     },
     {
       icon: "✉️",
       label: "Email",
-      value: "nancyrajiv.a@gmail.com",
-      href: "mailto:nancyrajiv.a@gmail.com",
+      value: "allenrajiv6@gmail.com",
+      href: "mailto:allenrajiv6@gmail.com",
     },
   ],
   form: {
@@ -278,7 +278,7 @@ export const contact = {
     messageLabel: "What are you trying to solve?",
     submitButton: "Send enquiry",
     successMessage: "Thanks! We'll get back to you soon.",
-    errorMessage: "Something went wrong. Please call 93600 16108.",
+    errorMessage: "Something went wrong. Please call +1 236 512 1809.",
   },
 };
 
@@ -290,8 +290,8 @@ export const footer = {
 export const seo = {
   title: `${businessName} | Business Intelligence, Dashboards & Microsoft 365`,
   description:
-    "RN designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
-  phone: "+919360016108",
-  email: "nancyrajiv.a@gmail.com",
+    "Datavise designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
+  phone: "+12365121809",
+  email: "allenrajiv6@gmail.com",
   url: "",
 };

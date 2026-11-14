@@ -19,36 +19,98 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { tokens } from "../theme/theme";
 import { useColorMode } from "../theme/ColorModeContext";
-import { navbar, businessName } from "../content/siteContent";
+import { navbar } from "../content/siteContent";
+import dataviseMark from "../assets/datavise-mark.svg";
+import dataviseMarkLight from "../assets/datavise-mark-light.svg";
 
-const GradientLogo = ({ size = 34 }: { size?: number }) => (
+const BrandMark = ({ size = 34 }: { size?: number }) => {
+  const { mode } = useColorMode();
+  return (
+    <Box
+      component="img"
+      src={mode === "dark" ? dataviseMark : dataviseMarkLight}
+      alt=""
+      aria-hidden="true"
+      sx={{
+        height: size,
+        width: "auto",
+        display: "block",
+        flexShrink: 0,
+      }}
+    />
+  );
+};
+
+const BrandWordmark = ({
+  fontSize = 22,
+}: {
+  fontSize?: number | string;
+}) => (
   <Box
+    component="span"
+    aria-label="DataVize IT Consulting"
     sx={{
-      width: size,
-      height: size,
-      borderRadius: Math.round(size * 0.265),
-      background: (theme) =>
-        theme.palette.mode === "dark"
-          ? "linear-gradient(120deg,#7c5cff,#22d3ee)"
-          : "linear-gradient(120deg,#5b3df5,#0891b2)",
-      display: "flex",
-      alignItems: "center",
+      display: "inline-flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
       justifyContent: "center",
-      color: "#fff",
-      fontWeight: 800,
-      fontSize: Math.round(size * 0.47),
-      letterSpacing: "-.02em",
-      boxShadow: (theme) =>
-        `0 8px 28px -10px ${
-          theme.palette.mode === "dark"
-            ? "rgba(124,92,255,.55)"
-            : "rgba(91,61,245,.45)"
-        }`,
-      flexShrink: 0,
+      lineHeight: 1,
+      whiteSpace: "nowrap",
+      fontFamily: '"Plus Jakarta Sans", "Avenir Next", "Montserrat", "Segoe UI", sans-serif',
     }}
-    aria-hidden="true"
   >
-    {businessName}
+    <Box
+      component="span"
+      sx={{
+        display: "inline-flex",
+        alignItems: "baseline",
+        fontSize,
+        fontWeight: 600,
+        letterSpacing: "-0.01em",
+        lineHeight: 1.05,
+      }}
+    >
+      <Box
+        component="span"
+        sx={{
+          color: (theme) =>
+            theme.palette.mode === "dark" ? "#FAFCFF" : "#071426",
+        }}
+      >
+        Data
+      </Box>
+      <Box
+        component="span"
+        sx={{
+          background:
+            "linear-gradient(90deg, #006CFF 0%, #00BED2 50%, #00DDB0 100%)",
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          color: "transparent",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        Vize
+      </Box>
+    </Box>
+    <Box
+      component="span"
+      sx={{
+        mt: "3px",
+        fontSize:
+          typeof fontSize === "number"
+            ? Math.max(9, Math.round(fontSize * 0.29))
+            : "0.29em",
+        fontWeight: 400,
+        letterSpacing: "0.28em",
+        textTransform: "uppercase",
+        color: (theme) =>
+          theme.palette.mode === "dark" ? "#FAFCFF" : "#071426",
+        lineHeight: 1.1,
+      }}
+    >
+      IT Consulting
+    </Box>
   </Box>
 );
 
@@ -113,17 +175,10 @@ const Navbar = () => {
               color: "text.primary",
               "&:hover": { textDecoration: "none" },
             }}
-            aria-label={`${businessName} home`}
+            aria-label="DataVize IT Consulting home"
           >
-            <GradientLogo />
-            <Box
-              component="span"
-              sx={{
-                whiteSpace: "nowrap",
-              }}
-            >
-              {businessName}
-            </Box>
+            <BrandMark />
+            <BrandWordmark />
           </Link>
 
           {isDesktop ? (
@@ -213,36 +268,20 @@ const Navbar = () => {
                 variant="contained"
                 href={navbar.ctaHref}
                 sx={{
-                  background: (theme) =>
-                    theme.palette.mode === "dark"
-                      ? "linear-gradient(120deg,#7c5cff,#22d3ee)"
-                      : "linear-gradient(120deg,#5b3df5,#0891b2)",
-                  color: "#fff",
+                  background: "#fff",
+                  color: "#071426",
                   px: 2.6,
                   py: 1.1,
                   fontWeight: 700,
                   fontSize: 14.5,
-                  textShadow: "0 1px 2px rgba(0,0,0,0.3)",
-                  boxShadow: (theme) =>
-                    `0 10px 30px -12px ${
-                      theme.palette.mode === "dark"
-                        ? "rgba(124,92,255,.7)"
-                        : "rgba(91,61,245,.55)"
-                    }`,
+                  boxShadow: "0 10px 30px -12px rgba(7,20,38,0.35)",
                   "&:hover": {
-                    background: (theme) =>
-                      theme.palette.mode === "dark"
-                        ? "linear-gradient(120deg,#6a4aff,#0bb8d1)"
-                        : "linear-gradient(120deg,#4d2ee0,#077a98)",
-                    boxShadow: (theme) =>
-                      `0 14px 36px -12px ${
-                        theme.palette.mode === "dark"
-                          ? "rgba(124,92,255,.85)"
-                          : "rgba(91,61,245,.7)"
-                      }`,
+                    background: "#f3f6fb",
+                    boxShadow: "0 14px 36px -12px rgba(7,20,38,0.45)",
                     transform: "translateY(-2px)",
                   },
-                  transition: "transform .2s ease, box-shadow .2s ease, background .2s ease",
+                  transition:
+                    "transform .2s ease, box-shadow .2s ease, background .2s ease",
                 }}
               >
                 {navbar.ctaButton}
@@ -269,8 +308,8 @@ const Navbar = () => {
         }}
       >
         <Box sx={{ px: 3, pb: 2, display: "flex", alignItems: "center", gap: 1.6 }}>
-          <GradientLogo size={30} />
-          <Box sx={{ fontWeight: 800, fontSize: 17 }}>{businessName}</Box>
+          <BrandMark size={30} />
+          <BrandWordmark fontSize={20} />
         </Box>
         <List sx={{ px: 2 }}>
           {navbar.links.map((link) => (
@@ -296,18 +335,13 @@ const Navbar = () => {
               href={navbar.ctaHref}
               onClick={() => setDrawerOpen(false)}
               sx={{
-                background: (theme) =>
-                  theme.palette.mode === "dark"
-                    ? "linear-gradient(120deg,#7c5cff,#22d3ee)"
-                    : "linear-gradient(120deg,#5b3df5,#0891b2)",
-                color: "#fff",
+                background: "#fff",
+                color: "#071426",
                 fontWeight: 700,
-                boxShadow: (theme) =>
-                  `0 10px 30px -12px ${
-                    theme.palette.mode === "dark"
-                      ? "rgba(124,92,255,.7)"
-                      : "rgba(91,61,245,.55)"
-                  }`,
+                boxShadow: "0 10px 30px -12px rgba(7,20,38,0.35)",
+                "&:hover": {
+                  background: "#f3f6fb",
+                },
               }}
             >
               {navbar.ctaButton}
