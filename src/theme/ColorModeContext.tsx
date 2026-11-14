@@ -22,7 +22,7 @@ const ColorModeContext = createContext<ColorModeContextValue | undefined>(
   undefined
 );
 
-const STORAGE_KEY = "rn-color-mode";
+const STORAGE_KEY = "datavise-color-mode";
 
 const getInitialMode = (): ColorMode => {
   if (typeof window === "undefined") return "dark";
