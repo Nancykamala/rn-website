@@ -238,20 +238,20 @@ export const contact = {
     {
       icon: "📞",
       label: "Phone",
-      value: "93600 16108",
-      href: "tel:+919360016108",
+      value: "+1 236 512 1809",
+      href: "tel:+12365121809",
     },
     {
       icon: "💬",
       label: "WhatsApp",
       value: "Chat with us",
-      href: "https://wa.me/919360016108",
+      href: "https://wa.me/12365121809",
     },
     {
       icon: "✉️",
       label: "Email",
-      value: "nancyrajiv.a@gmail.com",
-      href: "mailto:nancyrajiv.a@gmail.com",
+      value: "allenrajiv6@gmail.com",
+      href: "mailto:allenrajiv6@gmail.com",
     },
   ],
   form: {
@@ -278,7 +278,7 @@ export const contact = {
     messageLabel: "What are you trying to solve?",
     submitButton: "Send enquiry",
     successMessage: "Thanks! We'll get back to you soon.",
-    errorMessage: "Something went wrong. Please call 93600 16108.",
+    errorMessage: "Something went wrong. Please call +1 236 512 1809.",
   },
 };
 
@@ -291,7 +291,7 @@ export const seo = {
   title: `${businessName} | Business Intelligence, Dashboards & Microsoft 365`,
   description:
     "Datavise designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
-  phone: "+919360016108",
-  email: "nancyrajiv.a@gmail.com",
+  phone: "+12365121809",
+  email: "allenrajiv6@gmail.com",
   url: "",
 };
