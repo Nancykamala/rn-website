@@ -1,6 +1,6 @@
-# RN Website
+# Datavise Website
 
-A modern React business website for RN - Business Intelligence, Dashboards & Microsoft 365 automation services.
+A modern React business website for Datavise - Business Intelligence, Dashboards & Microsoft 365 automation services.
 
 ## Tech Stack
 

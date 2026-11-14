@@ -168,7 +168,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ].join("\n\n");
 
         const emailData = {
-          from: "RN Website <onboarding@resend.dev>",
+          from: "Datavise Website <onboarding@resend.dev>",
           to: notifyEmail,
           subject: `New enquiry from ${validated.fullName}`,
           text: emailBody,
