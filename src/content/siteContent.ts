@@ -1,5 +1,5 @@
-export const businessName = "Datavise";
-export const businessNameFull = "Datavise";
+export const businessName = "DataVize";
+export const businessNameFull = "DataVize";
 export const taglineShort = "Business Intelligence · Microsoft 365 · Automation";
 
 export const navbar = {
@@ -18,7 +18,7 @@ export const hero = {
   h1Line1: "Turn your data into decisions",
   h1Line2Gradient: "and your manual work into automation.",
   lead:
-    "Datavise designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
+    "DataVize designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
   primaryButton: "Book a free discovery call",
   primaryHref: "#contact",
   secondaryButton: "Explore services",
@@ -181,7 +181,7 @@ export const process = {
 
 export const whyUs = {
   id: "why",
-  tag: "Why Datavise",
+  tag: "Why DataVize",
   h2: "Practical analytics from people who know operations",
   sub: "",
   cards: [
@@ -283,14 +283,14 @@ export const contact = {
 };
 
 export const footer = {
-  copyright: `© ${businessName}. All rights reserved.`,
+  copyright: `© @datavize.com. All rights reserved.`,
   tagline: "Analytics · Microsoft 365 · Automation",
 };
 
 export const seo = {
   title: `${businessName} | Business Intelligence, Dashboards & Microsoft 365`,
   description:
-    "Datavise designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
+    "DataVize designs dashboards, KPI frameworks and Microsoft 365 workflows that give you a clear view of the business and automate the manual work behind it.",
   phone: "+12365121809",
   email: "allenrajiv6@gmail.com",
   url: "",
